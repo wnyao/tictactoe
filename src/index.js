@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types'; //TODO
 import './index.css';
 
 //Functional component
@@ -75,12 +75,12 @@ class Game extends React.Component {
         const history = this.state.history.slice(0, this.state.stepNumber + 1); 
         const moves = this.state.moves.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
-        const squares = current.squares.slice(); //copy a new array
+        const squares = current.squares.slice(); //use slice for immutability of initial object
         if (calculateWinner(squares) || squares[i]) { //if calculateWInner() return or auqres[i] == null
             return
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
-        moves.push(coordinate);
+        moves.push(coordinate); //push new coordinate to state
         this.setState({
             history: history.concat([
                 {squares: squares}
@@ -101,21 +101,31 @@ class Game extends React.Component {
     }
 
     //Generate block elements history list 
-    genHistoryList() {
+    genHistoryList(stepNum) {
         const history = this.state.history;
         const moves = history.map((step, move) => {
             const coor = this.state.moves[move];
-            console.log(coor); //****** */
             const desc = move ?
                 'Go to move #' + move :
                 'Go to game start';
-            return (
-                <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                    <p>{coor ? ('Move: (' + coor[0] + ', ' + coor[1] + ')') : ''}</p>
-                </li>
-            );
+
+            if (move !== stepNum) {
+                return (
+                    <li key={move}>
+                        <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                        <p>{coor ? ('Move: (' + coor[0] + ', ' + coor[1] + ')') : ''}</p>
+                    </li>
+                );
+            } else {
+                return (
+                    <li key={move}>
+                        <button style={{fontWeight: 'bold'}} onClick={() => this.jumpTo(move)}>{desc}</button>
+                        <p>{coor ? ('Move: (' + coor[0] + ', ' + coor[1] + ')') : ''}</p>
+                    </li>
+                );
+            }
         });
+
         return moves;
     }
 
@@ -124,7 +134,7 @@ class Game extends React.Component {
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
         const status = this.genStatus(winner);
-        const moves = this.genHistoryList();
+        const moves = this.genHistoryList(this.state.stepNumber);
 
         //return hierachy
         return (
@@ -189,9 +199,12 @@ Square.propTypes = {
 
 
 /* 
+TODO LIST:
  - Display the location for each move in the format(col, row) in the move history list. [DONE]
- - Bold the currently selected item in the move list.
+ - Bold the currently selected item in the move history list. [DONE]
  - Rewrite Board to use two loops to make the squares instead of hardcoding them.
  - Add a toggle button that lets you sort the moves in either ascending or descending order. 
  - When someone wins, highlight the three squares that caused the win.
- - When no one wins, display a message about the result being a draw. */
+ - When no one wins, display a message about the result being a draw.
+ - Set proptypes 
+ */
