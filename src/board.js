@@ -23,26 +23,30 @@ class Board extends React.Component {
         );
     }
 
+    renderBoard() {
+        const squares = [];
+        const boardRows = [];
+        const rowBlock = (squares) => (<div className="board-row">{squares[0]}{squares[1]}{squares[2]}</div>);
+        const div = (boardRows) => (<div>{boardRows[0]}{boardRows[1]}{boardRows[2]}</div>);
+
+        let index = 0;
+        for (var j = 3; j > 0; j--) {
+            for (var i = 0; i < 3; i++) {
+                const square = this.renderSquare(index++, [j, i + 1]);
+                squares.push(square);
+            }
+            
+            const boardRow = rowBlock(squares);
+            boardRows.push(boardRow);
+            squares.splice(0); //clear array to store squares of next board row
+        }
+
+        return(div(boardRows));
+    }
+
     render() {
-        return (
-            <div>
-                <div className="board-row">
-                    {this.renderSquare(0, [1, 1])}
-                    {this.renderSquare(1, [1, 2])}
-                    {this.renderSquare(2, [1, 3])}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3, [2, 1])}
-                    {this.renderSquare(4, [2, 2])}
-                    {this.renderSquare(5, [2, 3])}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6, [3, 1])}
-                    {this.renderSquare(7, [3, 2])}
-                    {this.renderSquare(8, [3, 3])}
-                </div>
-            </div>
-        );
+        const boardComponent = this.renderBoard();
+        return(boardComponent);
     }
 }
 
