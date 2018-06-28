@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Board} from './board.js';
+import {ToggleButton, Board} from './board.js';
 import './css/index.css';
 class Game extends React.Component {
     constructor(props) {
@@ -13,6 +13,7 @@ class Game extends React.Component {
             ],
             stepNumber: 0,
             moves: [[]],
+            isDesc: true,
             xIsNext: true,
         };
     }
@@ -21,17 +22,23 @@ class Game extends React.Component {
     handleClick(i, coordinate) {
         const history = this.state.history.slice(); 
         const moves = this.state.moves.slice(0, this.state.stepNumber + 1);
-        const current = history[history.length - 1];
+        const current = history[this.state.isDesc? history.length - 1: 0];
         const squares = current.squares.slice(); //use slice for immutability of initial object
         if (calculateWinner(squares) || squares[i]) { //if calculateWInner() return or auqres[i] == null
             return
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
-        moves.push(coordinate); //push new coordinate to state
+
+        if (this.state.isDesc) {
+            moves.push(coordinate); //push new coordinate to state
+        } else {
+            moves.unshift(coordinate);
+        }
+
         this.setState({
-            history: history.concat([
-                {squares: squares}
-            ]),
+            history: this.state.isDesc ? 
+                history.concat([{squares: squares}]): 
+                [{squares: squares}].concat(history),
             stepNumber: history.length,
             moves: moves,
             xIsNext: !this.state.xIsNext
@@ -58,35 +65,37 @@ class Game extends React.Component {
 
     //Generate block elements history list 
     genHistoryList(stepNum) {
-        const history = this.state.history;
+        const history = this.state.history; //Array.prototype.reverse()
+    
         const moves = history.map((step, move) => {
+            const index = this.state.isDesc ? move: history.length - move - 1; //index order based according to sorting order
             const coor = this.state.moves[move];
-            const desc = move ?
-                'Go to move #' + move :
+            const desc = index ?
+                'Go to move #' + index:
                 'Go to game start';
 
             const coorMsg = coor ? 
-                ('Move #' + move + ': (' + coor[0] + ', ' + coor[1] + ')'):
+                ('Move #' + index + ': (' + coor[0] + ', ' + coor[1] + ')'):
                 '';
 
-            if (move === 0) {
+            if (index === 0) {
                 return (
-                    <li key={0}>
+                    <li key={index}>
                         <button onClick={() => this.jumpTo(0)}>{desc}</button>
                         <p>{'Board is clear!'}</p>
                     </li>
                 );
-            } else if (move !== stepNum) {
+            } else if (index !== stepNum) {
                 return (
-                    <li key={move}>
-                        <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <li key={index}>
+                        <button onClick={() => this.jumpTo(index)}>{desc}</button>
                         <p>{coorMsg}</p>
                     </li>
                     );
             } else {
                 return (
-                    <li key={move}>
-                        <button style={{fontWeight: 'bold'}} onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <li key={index}>
+                        <button style={{fontWeight: 'bold'}} onClick={() => this.jumpTo(index)}>{desc}</button>
                         <p>{coorMsg}</p>
                     </li>
                 );
@@ -96,9 +105,17 @@ class Game extends React.Component {
         return moves;
     }
 
+    changeOrder() {
+        this.setState({
+            history: this.state.history.reverse(),
+            moves: this.state.moves.reverse(),
+            isDesc: !this.state.isDesc
+        });
+    }
+
     render() {
         const history = this.state.history;
-        const current = history[this.state.stepNumber];
+        const current = history[this.state.isDesc? this.state.stepNumber: 0];
         const winner = calculateWinner(current.squares);
         const status = this.genStatus(winner);
         const moves = this.genHistoryList(this.state.stepNumber);
@@ -114,7 +131,10 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-    
+                    <ToggleButton 
+                        onClick={() => this.changeOrder()}
+                        value={this.state.isDesc ? 'Sort in ascending order': 'Sort in descending order'}
+                    />
                     <ol>{moves}</ol>
                 </div>
             </div>
@@ -142,12 +162,12 @@ function calculateWinner(squares) {
     }
 }
 
-// ===========================================
-
 ReactDOM.render(
     <Game />,
     document.getElementById('root')
 )
+
+//===================================
 
 /* Game.propTypes = {
     status: PropTypes.String, 
@@ -171,7 +191,7 @@ TODO LIST:
  - Display the location for each move in the format(col, row) in the move history list. [DONE]
  - Bold the currently selected item in the move history list. [DONE]
  - Rewrite Board to use two loops to make the squares instead of hardcoding them. [DONE]
- - Add a toggle button that lets you sort the moves in either ascending or descending order. 
+ - Add a toggle button that lets you sort the moves in either ascending or descending order. [DONE]
  - When someone wins, highlight the three squares that caused the win.
  - When no one wins, display a message about the result being a draw.
  - Set proptypes 
