@@ -5,7 +5,7 @@ import './css/index.css';
 function Square(props) {
     return (
         <button
-            className="square"
+            className="square" 
             onClick={props.onClick}
         >
             {props.value}
@@ -24,24 +24,19 @@ class Board extends React.Component {
     }
 
     renderBoard() {
-        const squares = [];
-        const boardRows = [];
         const rowBlock = (squares) => (<div className="board-row">{squares[0]}{squares[1]}{squares[2]}</div>);
-        const div = (boardRows) => (<div>{boardRows[0]}{boardRows[1]}{boardRows[2]}</div>);
 
-        let index = 0;
-        for (var j = 3; j > 0; j--) {
-            for (var i = 0; i < 3; i++) {
-                const square = this.renderSquare(index++, [j, i + 1]);
-                squares.push(square);
-            }
-            
-            const boardRow = rowBlock(squares);
-            boardRows.push(boardRow);
-            squares.splice(0); //clear array to store squares of next board row
-        }
+        const length = 3;
+        const boardRows = Array.from({length}, (currentVal, outer) => { //outer & index: index of the current element being processed in the array
+            const row = 3 - outer;
+            const boardRow = Array.from({length}, (currentVal, index) => ( //currentVal: current element being processed
+                this.renderSquare(outer * length + index, [row, index + 1])
+            ))
 
-        return(div(boardRows));
+            return rowBlock(boardRow);
+        });
+
+        return (boardRows);
     }
 
     render() {
@@ -50,4 +45,6 @@ class Board extends React.Component {
     }
 }
 
-export default Board;
+export {
+    Board
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Board from './board.js';
+import {Board} from './board.js';
 import './css/index.css';
 class Game extends React.Component {
     constructor(props) {
@@ -114,6 +114,7 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
+    
                     <ol>{moves}</ol>
                 </div>
             </div>
