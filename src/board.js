@@ -11,32 +11,12 @@ const Button = props => (
     </button>
 );
 
-//Container
-function Square(props) {
-    return (
-        <Button
-            className="square" 
-            onClick={props.onClick} 
-            value={props.value}
-        />
-    );
-};
-
-function ToggleButton(props) {
-    return (
-        <Button
-            className="button" 
-            onClick={props.onClick}
-            value={props.value}
-        />
-    );
-};
-
 class Board extends React.Component {
     //Return a single button component
     renderSquare(i, coordinate) {
         return (
-            <Square
+            <Button 
+                className="square"
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i, coordinate)}
             />
@@ -66,6 +46,6 @@ class Board extends React.Component {
 }
 
 export {
-    ToggleButton,
+    Button,
     Board
 }
