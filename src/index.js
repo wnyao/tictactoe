@@ -23,34 +23,48 @@ class Game extends React.Component {
         const history = this.state.history.slice(); 
         const moves = this.state.moves.slice(0, this.state.stepNumber + 1);
         const current = history[this.state.isDesc? history.length - 1: 0];
-        const squares = current.squares.slice(); //use slice for immutability of initial object
-        if (calculateWinner(squares) || squares[i]) { //if calculateWInner() return or auqres[i] == null
+        const squares = current.squares.slice();
+
+        //if calculateWinner() return or squares[i] == null
+        if (calculateWinner(squares) || squares[i]) {
             return
         }
+
         squares[i] = this.state.xIsNext ? 'X' : 'O';
 
-        if (this.state.isDesc) {
-            moves.push(coordinate); //push new coordinate to state
+        //insert to front if in ascending order else push to back
+        if (this.state.isDesc) { 
+            moves.push(coordinate); 
         } else {
             moves.unshift(coordinate);
         }
-
+        
+        //set state
         this.setState({
-            history: this.state.isDesc ? 
+            history: (this.state.isDesc ? 
                 history.concat([{squares: squares}]): 
-                [{squares: squares}].concat(history),
+                [{squares: squares}].concat(history)),
             stepNumber: history.length,
             moves: moves,
             xIsNext: !this.state.xIsNext
-        }); //assign new state of variables
+        });
     }
 
-    jumpTo(step) {
-        const history = this.state.history.slice(0, step + 1);
+    jumpTo(move) {
+        //if in descending order from start to index, else from the index to end
+        const from = this.state.isDesc ? 0: this.state.history.length - (move + 1);
+        const to = this.state.isDesc ? (move + 1): this.state.history.length; 
+
+        //new array containing extracted elements
+        const history = this.state.history.slice(from, to);
+        const moves = this.state.moves.slice(from, to);
+
+        //set state
         this.setState({
             history: history,
-            stepNumber: step,
-            xIsNext: (step % 2) === 0
+            stepNumber: move,
+            moves: moves,
+            xIsNext: (move % 2) === 0
         });
     }
 
@@ -63,17 +77,26 @@ class Game extends React.Component {
         }
     }
 
+    //Change order of history and moves record when togglebutton triggered
+    changeOrder() {
+        this.setState({
+            history: this.state.history.reverse(),
+            moves: this.state.moves.reverse(),
+            isDesc: !this.state.isDesc
+        });
+    }
+
     //Generate block elements history list 
     genHistoryList(stepNum) {
         const history = this.state.history; //Array.prototype.reverse()
-    
         const moves = history.map((step, move) => {
             const index = this.state.isDesc ? move: history.length - move - 1; //index order based according to sorting order
             const coor = this.state.moves[move];
+
+            //Elements of history list
             const desc = index ?
                 'Go to move #' + index:
                 'Go to game start';
-
             const coorMsg = coor ? 
                 ('Move #' + index + ': (' + coor[0] + ', ' + coor[1] + ')'):
                 '';
@@ -103,14 +126,6 @@ class Game extends React.Component {
         });
 
         return moves;
-    }
-
-    changeOrder() {
-        this.setState({
-            history: this.state.history.reverse(),
-            moves: this.state.moves.reverse(),
-            isDesc: !this.state.isDesc
-        });
     }
 
     render() {
