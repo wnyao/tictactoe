@@ -1,25 +1,36 @@
 import React from 'react';
 import './css/index.css';
 
-function Square(props) { //Example of functional component (Check react docs to learn more)
-    return (
-        <button
-            className="square" 
-            onClick={props.onClick}
-        >
-            {props.value}
-        </button>
-    );
-}
+//Presentational Component
+const Button = props => (
+    <button
+        className={props.className}
+        onClick={props.onClick}
+    >
+        {props.value}
+    </button>
+);
 
+//Container
+function Square(props) {
+    return (
+        <Button
+            className="square" 
+            onClick={props.onClick} 
+            value={props.value}
+        />
+    );
+};
 
 function ToggleButton(props) {
     return (
-        <button onClick={props.onClick}>
-            {props.value}
-        </button>
+        <Button
+            className="button" 
+            onClick={props.onClick}
+            value={props.value}
+        />
     );
-}
+};
 
 class Board extends React.Component {
     //Return a single button component
