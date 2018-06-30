@@ -4,7 +4,7 @@ import {Button, Board} from './board.js';
 import './css/index.css';
 
 
-//Container
+//Toggle button Container
 function ToggleButton(props) {
     return (
         <Button
@@ -119,6 +119,25 @@ class Game extends React.Component {
         });
     }
 
+    //return element of history list
+    renderList(index, desc, coorMsg, style) {
+        if (style.fontWeight === undefined) {
+            return (
+                <li key={index}>
+                    <button onClick={() => this.jumpTo(index)}>{desc}</button>
+                    <p>{coorMsg}</p>
+                </li>
+            );
+        } else {
+            return (
+                <li key={index}>
+                    <button style={style} onClick={() => this.jumpTo(index)}>{desc}</button>
+                    <p>{coorMsg}</p>
+                </li>
+            );
+        }
+    }
+
     //Generate block elements history list 
     genHistoryList(stepNum) {
         const history = this.state.history; //Array.prototype.reverse()
@@ -130,31 +149,15 @@ class Game extends React.Component {
             const desc = index ?
                 'Go to move #' + index:
                 'Go to game start';
-            const coorMsg = coor ? 
-                ('Move #' + index + ': (' + coor[0] + ', ' + coor[1] + ')'):
-                '';
+            
+            const coorMsg = ('Move #' + index + ': (' + coor[0] + ', ' + coor[1] + ')');
 
             if (index === 0) {
-                return (
-                    <li key={index}>
-                        <button onClick={() => this.jumpTo(0)}>{desc}</button>
-                        <p>{'Board is clear!'}</p>
-                    </li>
-                );
+                return (this.renderList(0, desc, coorMsg, {}));
             } else if (index !== stepNum) {
-                return (
-                    <li key={index}>
-                        <button onClick={() => this.jumpTo(index)}>{desc}</button>
-                        <p>{coorMsg}</p>
-                    </li>
-                    );
+                return (this.renderList(index, desc, coorMsg, {}));
             } else {
-                return (
-                    <li key={index}>
-                        <button style={{fontWeight: 'bold'}} onClick={() => this.jumpTo(index)}>{desc}</button>
-                        <p>{coorMsg}</p>
-                    </li>
-                );
+                return (this.renderList(index, desc, coorMsg, { fontWeight: 'bold' }));
             }
         });
 
