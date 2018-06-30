@@ -153,7 +153,7 @@ class Game extends React.Component {
             const coorMsg = ('Move #' + index + ': (' + coor[0] + ', ' + coor[1] + ')');
 
             if (index === 0) {
-                return (this.renderList(0, desc, coorMsg, {}));
+                return (this.renderList(0, desc, 'Start of the game', {}));
             } else if (index !== stepNum) {
                 return (this.renderList(index, desc, coorMsg, {}));
             } else {
