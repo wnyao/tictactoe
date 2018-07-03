@@ -3,7 +3,11 @@ import "./css/index.css";
 
 //Presentational Component
 const Button = props => (
-  <button className={props.className} onClick={props.onClick}>
+  <button
+    className={props.className}
+    onClick={props.onClick}
+    style={props.style}
+  >
     {props.value}
   </button>
 );
@@ -11,9 +15,14 @@ const Button = props => (
 class Board extends React.Component {
   //Return a single button component
   renderSquare(i, coordinate) {
+    const style = { backgroundColor: "cyan" };
+    const winningLine = this.props.winningLine;
+    const isMatch = winningLine.some(number => number === i);
+
     return (
       <Button
-        className="square"
+        className={"square"}
+        style={isMatch ? style : null}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i, coordinate)}
       />

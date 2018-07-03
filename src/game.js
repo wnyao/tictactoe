@@ -12,7 +12,7 @@ function ToggleButton(props) {
   );
 }
 
-function calculateWinner(squares) {
+function evalWinner(squares) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -27,7 +27,12 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      const winnerInfo = {
+        line: lines[i],
+        player: squares[a]
+      };
+
+      return winnerInfo;
     }
   }
 }
@@ -56,7 +61,7 @@ class Game extends React.Component {
     const squares = current.squares.slice();
 
     //if calculateWinner() return or squares[i] == null
-    if (calculateWinner(squares) || squares[i]) {
+    if (evalWinner(squares) || squares[i]) {
       return;
     }
 
@@ -99,9 +104,9 @@ class Game extends React.Component {
   }
 
   //Generate current game status
-  genStatus(winner) {
-    if (winner) {
-      return "Winner: " + winner;
+  genStatus(winnerInfo) {
+    if (winnerInfo) {
+      return "Winner: " + winnerInfo.player;
     } else {
       return "Next Player: " + (this.state.xIsNext ? "X" : "O");
     }
@@ -163,8 +168,8 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.isDesc ? this.state.stepNumber : 0];
-    const winner = calculateWinner(current.squares);
-    const status = this.genStatus(winner);
+    const winnerInfo = evalWinner(current.squares);
+    const status = this.genStatus(winnerInfo);
     const moves = this.genHistoryList(this.state.stepNumber);
 
     //return hierachy
@@ -172,6 +177,7 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-board">
           <Board
+            winningLine={winnerInfo ? winnerInfo.line : []}
             squares={current.squares}
             onClick={(i, coordinate) => this.handleClick(i, coordinate)}
           />
@@ -207,7 +213,7 @@ TODO LIST:
  - Bold the currently selected item in the move history list. [DONE]
  - Rewrite Board to use two loops to make the squares instead of hardcoding them. [DONE]
  - Add a toggle button that lets you sort the moves in either ascending or descending order. [DONE]
- - When someone wins, highlight the three squares that caused the win.
+ - When someone wins, highlight the three squares that caused the win. [DONE]
  - When no one wins, display a message about the result being a draw.
  - Set proptypes 
  */
