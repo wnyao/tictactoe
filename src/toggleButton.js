@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Component below is used only for learning purposes
+ */
 class ToggleBtn extends React.Component {
   constructor(props) {
     super(props);
