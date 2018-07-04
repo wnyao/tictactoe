@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/index.css";
-import { Gameset, GameOverStatus, RouteExample } from "./gameComponent.js";
+import { Gameset, GameOverStatus, List } from "./gameComponent.js";
 
 //Winner evaluation function
 function evalWinner(squares) {
@@ -113,27 +113,6 @@ class Game extends React.Component {
     });
   }
 
-  //return element of history list
-  renderList(index, desc, coorMsg, style) {
-    if (style.fontWeight === undefined) {
-      return (
-        <li key={index}>
-          <button onClick={() => this.jumpTo(index)}>{desc}</button>
-          <p>{coorMsg}</p>
-        </li>
-      );
-    } else {
-      return (
-        <li key={index}>
-          <button style={style} onClick={() => this.jumpTo(index)}>
-            {desc}
-          </button>
-          <p>{coorMsg}</p>
-        </li>
-      );
-    }
-  }
-
   //Generate block elements history list
   genHistoryList(stepNum) {
     const history = this.state.history; //Array.prototype.reverse()
@@ -146,11 +125,35 @@ class Game extends React.Component {
       const coorMsg = "Move #" + index + ": (" + coor[0] + ", " + coor[1] + ")";
 
       if (index === 0) {
-        return this.renderList(0, desc, "Start of the game", {});
+        return (
+          <List
+            key={0}
+            style={null}
+            onClick={() => this.jumpTo(0)}
+            description={desc}
+            coordinateMsg={"Start of the game"}
+          />
+        );
       } else if (index !== stepNum) {
-        return this.renderList(index, desc, coorMsg, {});
+        return (
+          <List
+            key={index}
+            style={null}
+            onClick={() => this.jumpTo(index)}
+            description={desc}
+            coordinateMsg={coorMsg}
+          />
+        );
       } else {
-        return this.renderList(index, desc, coorMsg, { fontWeight: "bold" });
+        return (
+          <List
+            key={index}
+            style={{ fontWeight: "bold" }}
+            onClick={() => this.jumpTo(index)}
+            description={desc}
+            coordinateMsg={coorMsg}
+          />
+        );
       }
     });
 
@@ -162,11 +165,9 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.isDesc ? this.state.stepNumber : 0];
     const winnerInfo = evalWinner(current.squares);
-    const gameStatus = "Next Player: " + (this.state.xIsNext ? "X" : "O");
+    const playerStatus = "Next Player: " + (this.state.xIsNext ? "X" : "O");
     const historyList = this.genHistoryList(this.state.stepNumber);
-
     const gameOverStatus = this.genGameOverStatus(winnerInfo, history.length);
-    console.log(gameOverStatus);
 
     //Return gameover status when winner or draw is evaluated
     if (gameOverStatus !== undefined) {
@@ -185,7 +186,7 @@ class Game extends React.Component {
         winningLine={winnerInfo ? winnerInfo.line : []}
         squares={current.squares}
         onSquareClick={(i, coordinate) => this.handleClick(i, coordinate)}
-        status={gameStatus}
+        status={playerStatus}
         value={
           this.state.isDesc
             ? "Sort in ascending order"

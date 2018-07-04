@@ -8,6 +8,16 @@ const ToggleButton = props => (
   <Button className="button" onClick={props.onClick} value={props.value} />
 );
 
+//Lost for list in history list
+const List = props => (
+  <li>
+    <button style={props.style} onClick={props.onClick}>
+      {props.description}
+    </button>
+    <p>{props.coordinateMsg}</p>
+  </li>
+);
+
 //Gameboard for tictactoe
 const GameBoard = props => (
   <div className="game-board">
@@ -64,4 +74,4 @@ const Gameset = props => (
   </div>
 );
 
-export { Gameset, GameOverStatus, RouteExample };
+export { Gameset, GameOverStatus, List };
