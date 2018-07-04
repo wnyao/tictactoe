@@ -1,43 +1,6 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import { Button, Board } from "./board.js";
-import Toggle from "./test.js";
 import "./css/index.css";
-
-//Toggle button Container
-const ToggleButton = props => (
-  <Button className="button" onClick={props.onClick} value={props.value} />
-);
-
-//Gameboard for tictactoe
-const GameBoard = props => (
-  <div className="game-board">
-    <Board
-      winningLine={props.winningLine}
-      squares={props.squares}
-      onClick={props.onClick}
-    />
-  </div>
-);
-
-//Game info includes history lists and desc/asc toggle button
-const GameInfo = props => (
-  <div className="game-info">
-    <div>{props.status}</div>
-    <ToggleButton onClick={props.onClick} value={props.value} />
-    {props.historyList}
-  </div>
-);
-
-//Route example for learning purposes
-const RouteExample = props => (
-  <div>
-    <button>
-      <Link to="/test">Click Here</Link>
-    </button>
-    <Route path="/test" component={Toggle} />
-  </div>
-);
+import { Gameset, GameOverStatus, RouteExample } from "./gameComponent.js";
 
 //Winner evaluation function
 function evalWinner(squares) {
@@ -130,12 +93,14 @@ class Game extends React.Component {
     });
   }
 
-  //Generate current game status
-  genStatus(winnerInfo) {
-    if (winnerInfo) {
+  //Generate game over status
+  genGameOverStatus(winnerInfo, moveNum) {
+    if (winnerInfo === undefined && moveNum !== 10) {
+      return;
+    } else if (winnerInfo) {
       return "Winner: " + winnerInfo.player;
     } else {
-      return "Next Player: " + (this.state.xIsNext ? "X" : "O");
+      return "Draw";
     }
   }
 
@@ -197,29 +162,38 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.isDesc ? this.state.stepNumber : 0];
     const winnerInfo = evalWinner(current.squares);
-    const status = this.genStatus(winnerInfo);
+    const gameStatus = "Next Player: " + (this.state.xIsNext ? "X" : "O");
     const historyList = this.genHistoryList(this.state.stepNumber);
 
-    //return hierachy
-    return (
-      <div className="game">
-        <GameBoard
-          winningLine={winnerInfo ? winnerInfo.line : []} //if winnerInfo is undefined; else return []
+    const gameOverStatus = this.genGameOverStatus(winnerInfo, history.length);
+    console.log(gameOverStatus);
+
+    //Return gameover status when winner or draw is evaluated
+    if (gameOverStatus !== undefined) {
+      return (
+        <GameOverStatus
+          status={gameOverStatus}
+          winningLine={winnerInfo ? winnerInfo.line : []}
           squares={current.squares}
-          onClick={(i, coordinate) => this.handleClick(i, coordinate)}
         />
-        <GameInfo
-          status={status}
-          value={
-            this.state.isDesc
-              ? "Sort in ascending order"
-              : "Sort in descending order"
-          }
-          onClick={() => this.changeOrder()}
-          historyList={historyList}
-        />
-        <RouteExample />
-      </div>
+      );
+    }
+
+    //Return gameset
+    return (
+      <Gameset
+        winningLine={winnerInfo ? winnerInfo.line : []}
+        squares={current.squares}
+        onSquareClick={(i, coordinate) => this.handleClick(i, coordinate)}
+        status={gameStatus}
+        value={
+          this.state.isDesc
+            ? "Sort in ascending order"
+            : "Sort in descending order"
+        }
+        onToggleClick={() => this.changeOrder()}
+        historyList={historyList}
+      />
     );
   }
 }
@@ -235,7 +209,7 @@ TODO LIST:
  - Rewrite Board to use two loops to make the squares instead of hardcoding them. [DONE]
  - Add a toggle button that lets you sort the moves in either ascending or descending order. [DONE]
  - When someone wins, highlight the three squares that caused the win. [DONE]
- - When no one wins, display a message about the result being a draw.
+ - When no one wins, display a message about the result being a draw. [DONE]
  - Set proptypes 
  - styling 
  - make highlight bling
