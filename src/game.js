@@ -1,17 +1,45 @@
 import React from "react";
-import { Button, Board } from "./board.js";
 import { Route, Link } from "react-router-dom";
+import { Button, Board } from "./board.js";
+import Toggle from "./test.js";
 import "./css/index.css";
 
-import Toggle from "./test.js";
-
 //Toggle button Container
-function ToggleButton(props) {
-  return (
-    <Button className="button" onClick={props.onClick} value={props.value} />
-  );
-}
+const ToggleButton = props => (
+  <Button className="button" onClick={props.onClick} value={props.value} />
+);
 
+//Gameboard for tictactoe
+const GameBoard = props => (
+  <div className="game-board">
+    <Board
+      winningLine={props.winningLine}
+      squares={props.squares}
+      onClick={props.onClick}
+    />
+  </div>
+);
+
+//Game info includes history lists and desc/asc toggle button
+const GameInfo = props => (
+  <div className="game-info">
+    <div>{props.status}</div>
+    <ToggleButton onClick={props.onClick} value={props.value} />
+    {props.historyList}
+  </div>
+);
+
+//Route example for learning purposes
+const RouteExample = props => (
+  <div>
+    <button>
+      <Link to="/test">Click Here</Link>
+    </button>
+    <Route path="/test" component={Toggle} />
+  </div>
+);
+
+//Winner evaluation function
 function evalWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -36,7 +64,6 @@ function evalWinner(squares) {
     }
   }
 }
-
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -162,7 +189,8 @@ class Game extends React.Component {
       }
     });
 
-    return moves;
+    const historyList = <ol>{moves}</ol>;
+    return historyList;
   }
 
   render() {
@@ -170,34 +198,27 @@ class Game extends React.Component {
     const current = history[this.state.isDesc ? this.state.stepNumber : 0];
     const winnerInfo = evalWinner(current.squares);
     const status = this.genStatus(winnerInfo);
-    const moves = this.genHistoryList(this.state.stepNumber);
+    const historyList = this.genHistoryList(this.state.stepNumber);
 
     //return hierachy
     return (
       <div className="game">
-        <div className="game-board">
-          <Board
-            winningLine={winnerInfo ? winnerInfo.line : []}
-            squares={current.squares}
-            onClick={(i, coordinate) => this.handleClick(i, coordinate)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ToggleButton
-            onClick={() => this.changeOrder()}
-            value={
-              this.state.isDesc
-                ? "Sort in ascending order"
-                : "Sort in descending order"
-            }
-          />
-          <button>
-            <Link to="/test"> Click Here </Link>
-          </button>
-          <Route path="/test" component={Toggle} />
-          <ol>{moves}</ol>
-        </div>
+        <GameBoard
+          winningLine={winnerInfo ? winnerInfo.line : []} //if winnerInfo is undefined; else return []
+          squares={current.squares}
+          onClick={(i, coordinate) => this.handleClick(i, coordinate)}
+        />
+        <GameInfo
+          status={status}
+          value={
+            this.state.isDesc
+              ? "Sort in ascending order"
+              : "Sort in descending order"
+          }
+          onClick={() => this.changeOrder()}
+          historyList={historyList}
+        />
+        <RouteExample />
       </div>
     );
   }
@@ -216,4 +237,6 @@ TODO LIST:
  - When someone wins, highlight the three squares that caused the win. [DONE]
  - When no one wins, display a message about the result being a draw.
  - Set proptypes 
+ - styling 
+ - make highlight bling
  */
