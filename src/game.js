@@ -131,7 +131,7 @@ class Game extends React.Component {
             style={null}
             onClick={() => this.jumpTo(0)}
             description={desc}
-            coordinateMsg={"Start of the game"}
+            coordinateMsg={"Place your move on a number"}
           />
         );
       } else if (index !== stepNum) {
@@ -165,7 +165,7 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.isDesc ? this.state.stepNumber : 0];
     const winnerInfo = evalWinner(current.squares);
-    const playerStatus = "Next Player: " + (this.state.xIsNext ? "X" : "O");
+    const playerStatus = "Player: " + (this.state.xIsNext ? "X" : "O");
     const historyList = this.genHistoryList(this.state.stepNumber);
     const gameOverStatus = this.genGameOverStatus(winnerInfo, history.length);
 

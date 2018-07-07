@@ -5,7 +5,11 @@ import ToggleBtn from "./toggleButton.js"; //testing purposes
 
 //Toggle button component
 const ToggleButton = props => (
-  <Button className="button" onClick={props.onClick} value={props.value} />
+  <Button
+    className="toggle-button"
+    onClick={props.onClick}
+    value={props.value}
+  />
 );
 
 //Lost for list in history list
@@ -16,6 +20,22 @@ const List = props => (
     </button>
     <p>{props.coordinateMsg}</p>
   </li>
+);
+
+//Route example for learning purposes
+const RouteExample = props => (
+  <div>
+    <button>
+      <Link to="/test">Click Here</Link>
+    </button>
+    <Route path="/test" component={ToggleBtn} />
+  </div>
+);
+
+const AppTitle = props => (
+  <div className="title">
+    <h1>Tic Tac Toe</h1>
+  </div>
 );
 
 //Gameboard for tictactoe
@@ -32,25 +52,18 @@ const GameBoard = props => (
 //Game info includes history lists and desc/asc toggle button
 const GameInfo = props => (
   <div className="game-info">
-    <div>{props.status}</div>
+    <div className="game-status">
+      <h2>{props.status}</h2>
+    </div>
     <ToggleButton onClick={props.onClick} value={props.value} />
+    <hr />
     {props.historyList}
-  </div>
-);
-
-//Route example for learning purposes
-const RouteExample = props => (
-  <div>
-    <button>
-      <Link to="/test">Click Here</Link>
-    </button>
-    <Route path="/test" component={ToggleBtn} />
   </div>
 );
 
 //Game over status for game ending
 const GameOverStatus = props => (
-  <div>
+  <div className="game">
     <h1>{props.status}</h1>
     <GameBoard winningLine={props.winningLine} squares={props.squares} />
   </div>
@@ -59,6 +72,7 @@ const GameOverStatus = props => (
 //Components of full tictactoe game set
 const Gameset = props => (
   <div className="game">
+    <AppTitle />
     <GameBoard
       winningLine={props.winningLine} //if winnerInfo is undefined; else return []
       squares={props.squares}
@@ -70,7 +84,7 @@ const Gameset = props => (
       onClick={props.onToggleClick}
       historyList={props.historyList}
     />
-    <RouteExample />
+    {/* <RouteExample /> */}
   </div>
 );
 

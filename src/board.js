@@ -15,15 +15,30 @@ const Button = props => (
 class Board extends React.Component {
   //Return a single button component
   renderSquare(i, coordinate) {
-    const style = { backgroundColor: "cyan" };
+    const winningStyle = {
+      backgroundColor: "cyan",
+      fontSize: "32px",
+      color: "white"
+    };
     const winningLine = this.props.winningLine;
     const isMatch = winningLine.some(number => number === i);
+    const value = this.props.squares[i] === null ? i : this.props.squares[i];
+
+    const textStyle = () => {
+      if (typeof value === "number") {
+        return { color: "black" };
+      } else if (value === "X") {
+        return { color: "#ff8963", fontSize: "32px" };
+      } else {
+        return { color: "#8cdc8b", fontSize: "32px" };
+      }
+    };
 
     return (
       <Button
         className={"square"}
-        style={isMatch ? style : null}
-        value={this.props.squares[i]}
+        style={isMatch ? winningStyle : textStyle()}
+        value={this.props.squares[i] === null ? i : this.props.squares[i]}
         onClick={() => this.props.onClick(i, coordinate)}
       />
     );
