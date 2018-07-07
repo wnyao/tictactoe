@@ -14,12 +14,12 @@ const ToggleButton = props => (
 
 //Lost for list in history list
 const List = props => (
-  <li>
-    <button style={props.style} onClick={props.onClick}>
+  <div className="list">
+    <button className="list-button" style={props.style} onClick={props.onClick}>
       {props.description}
     </button>
     <p>{props.coordinateMsg}</p>
-  </li>
+  </div>
 );
 
 //Route example for learning purposes
@@ -40,7 +40,7 @@ const AppTitle = props => (
 
 //Gameboard for tictactoe
 const GameBoard = props => (
-  <div className="game-board">
+  <div className={props.className}>
     <Board
       winningLine={props.winningLine}
       squares={props.squares}
@@ -51,13 +51,15 @@ const GameBoard = props => (
 
 //Game info includes history lists and desc/asc toggle button
 const GameInfo = props => (
-  <div className="game-info">
-    <div className="game-status">
-      <h2>{props.status}</h2>
+  <div className="outer-game-div">
+    <div className="game-info">
+      <div className="game-status">
+        <h2>{props.status}</h2>
+      </div>
+      <ToggleButton onClick={props.onClick} value={props.value} />
+      <hr />
+      {props.historyList}
     </div>
-    <ToggleButton onClick={props.onClick} value={props.value} />
-    <hr />
-    {props.historyList}
   </div>
 );
 
@@ -65,7 +67,11 @@ const GameInfo = props => (
 const GameOverStatus = props => (
   <div className="game">
     <h1>{props.status}</h1>
-    <GameBoard winningLine={props.winningLine} squares={props.squares} />
+    <GameBoard
+      className="game-board game-over"
+      winningLine={props.winningLine}
+      squares={props.squares}
+    />
   </div>
 );
 
@@ -74,6 +80,7 @@ const Gameset = props => (
   <div className="game">
     <AppTitle />
     <GameBoard
+      className="game-board"
       winningLine={props.winningLine} //if winnerInfo is undefined; else return []
       squares={props.squares}
       onClick={props.onSquareClick}

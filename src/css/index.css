@@ -4,10 +4,23 @@ body {
   font-weight: bold;
 }
 
-ol,
-ul {
-  padding-left: 0px;
-  text-align: center;
+hr {
+  margin-bottom: 20px;
+}
+
+h1,
+h2 {
+  position: static;
+  text-align: left;
+  width: 140px;
+}
+
+h1 {
+  margin: 40px 0px 20px 50px;
+}
+
+h2 {
+  margin-top: 0px;
 }
 
 .board-row:after {
@@ -49,7 +62,7 @@ ul {
   width: 100%;
 }
 
-.game-info {
+.outer-game-div {
   float: right;
   width: 300px;
   text-align: left;
@@ -63,30 +76,47 @@ ul {
   width: 477px;
 }
 
-h1,
-h2 {
-  position: static;
-  text-align: left;
-  width: 140px;
-}
-
-h1 {
-  margin: 40px 0px 0px 50px;
-}
-
-h2 {
-  margin-top: 0px;
+.game-over {
+  margin: 5%;
+  padding-top: 0px;
 }
 
 .title {
-  width: 50%;
+  width: 500px;
   position: fixed;
+  margin-bottom: 20px;
+  background: linear-gradient(white, white);
 }
 
 .game-status {
   display: inline-block;
 }
 
-.toggle-button {
+.toggle-button,
+.list-button {
   float: right;
+  border: 1px solid #000;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.list {
+  margin: 40px 0px 40px 0px;
+}
+
+@media (max-width: 876px) {
+  .game-info {
+    width: 400px;
+    text-align: left;
+    margin: auto;
+  }
+
+  .outer-game-div {
+    width: 100%;
+    margin: 50px 0px 100px 0px;
+  }
+
+  .title {
+    width: 100%;
+  }
 }

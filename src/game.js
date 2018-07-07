@@ -121,8 +121,9 @@ class Game extends React.Component {
       const coor = this.state.moves[move];
 
       //Elements of history list
-      const desc = index ? "Go to move #" + index : "Go to game start";
-      const coorMsg = "Move #" + index + ": (" + coor[0] + ", " + coor[1] + ")";
+      const desc = index ? "Back to #" + index : "Go to game start";
+      const coorMsg =
+        "Move #" + index + " at (" + coor[0] + ", " + coor[1] + ")";
 
       if (index === 0) {
         return (
@@ -157,7 +158,7 @@ class Game extends React.Component {
       }
     });
 
-    const historyList = <ol>{moves}</ol>;
+    const historyList = <div>{moves}</div>;
     return historyList;
   }
 
@@ -187,11 +188,7 @@ class Game extends React.Component {
         squares={current.squares}
         onSquareClick={(i, coordinate) => this.handleClick(i, coordinate)}
         status={playerStatus}
-        value={
-          this.state.isDesc
-            ? "Sort in ascending order"
-            : "Sort in descending order"
-        }
+        value={this.state.isDesc ? "Sort ↓" : "Sort ↑"}
         onToggleClick={() => this.changeOrder()}
         historyList={historyList}
       />
