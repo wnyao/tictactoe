@@ -3,7 +3,7 @@ import GithubIcon from "../res/images/github_icon.png";
 
 const Footer = props => (
   <div className="footer">
-    <ImageLink href="https://github.com/wnyao" src={GithubIcon} />
+    <ImageLink href="https://github.com/wnyao/tic-tac-toe" src={GithubIcon} />
   </div>
 );
 
