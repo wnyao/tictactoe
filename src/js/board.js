@@ -28,9 +28,9 @@ class Board extends React.Component {
       if (typeof value === "number") {
         return { color: "black" };
       } else if (value === "X") {
-        return { color: "#ff8963", fontSize: "32px" };
+        return { color: "#a31919", fontSize: "32px" };
       } else {
-        return { color: "#8cdc8b", fontSize: "32px" };
+        return { color: "#ff3300", fontSize: "32px" };
       }
     };
 
