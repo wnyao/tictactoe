@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/index.css";
+import "../css/index.css";
 
 //Presentational Component
 const Button = props => (

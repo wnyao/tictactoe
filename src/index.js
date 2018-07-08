@@ -1,11 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import Game from "./game.js";
+import Game from "./js/game.js";
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Game />
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+ReactDOM.render(<Game />, document.getElementById("root"));

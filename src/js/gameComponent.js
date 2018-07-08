@@ -1,7 +1,6 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
 import { Button, Board } from "./board.js";
-import ToggleBtn from "./toggleButton.js"; //testing purposes
+import Footer from "./footer.js";
 
 //Toggle button component
 const ToggleButton = props => (
@@ -12,26 +11,7 @@ const ToggleButton = props => (
   />
 );
 
-//Lost for list in history list
-const List = props => (
-  <div className="list">
-    <button className="list-button" style={props.style} onClick={props.onClick}>
-      {props.description}
-    </button>
-    <p>{props.coordinateMsg}</p>
-  </div>
-);
-
-//Route example for learning purposes
-const RouteExample = props => (
-  <div>
-    <button>
-      <Link to="/test">Click Here</Link>
-    </button>
-    <Route path="/test" component={ToggleBtn} />
-  </div>
-);
-
+//Title of the app
 const AppTitle = props => (
   <div className="title">
     <h1>Tic Tac Toe</h1>
@@ -71,6 +51,7 @@ const GameOverStatus = props => (
       className="game-board game-over"
       winningLine={props.winningLine}
       squares={props.squares}
+      onClick={props.onSquareClick}
     />
   </div>
 );
@@ -91,8 +72,8 @@ const Gameset = props => (
       onClick={props.onToggleClick}
       historyList={props.historyList}
     />
-    {/* <RouteExample /> */}
+    <Footer />
   </div>
 );
 
-export { Gameset, GameOverStatus, List };
+export { Gameset, GameOverStatus };

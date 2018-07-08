@@ -1,6 +1,7 @@
 import React from "react";
-import "./css/index.css";
-import { Gameset, GameOverStatus, List } from "./gameComponent.js";
+import "../css/index.css";
+import { Gameset, GameOverStatus } from "./gameComponent.js";
+import List from "./list.js";
 
 //Winner evaluation function
 function evalWinner(squares) {
@@ -177,6 +178,7 @@ class Game extends React.Component {
           status={gameOverStatus}
           winningLine={winnerInfo ? winnerInfo.line : []}
           squares={current.squares}
+          onSquareClick={(i, coordinate) => this.handleClick(i, coordinate)} //Board component receives onClick props; use for preventing error
         />
       );
     }
@@ -209,6 +211,6 @@ TODO LIST:
  - When someone wins, highlight the three squares that caused the win. [DONE]
  - When no one wins, display a message about the result being a draw. [DONE]
  - Set proptypes 
- - styling 
+ - styling [DONE]
  - make highlight bling
  */

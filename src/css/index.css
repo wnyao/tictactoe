@@ -66,12 +66,12 @@ h2 {
   float: right;
   width: 300px;
   text-align: left;
-  margin: 40px 50px 0px 50px;
+  margin: 40px 50px 0px 0px;
 }
 
 .game-board {
   display: inline-block;
-  margin-top: 10%;
+  margin-top: 8%;
   padding-top: 30px;
   width: 477px;
 }
@@ -104,6 +104,24 @@ h2 {
   margin: 40px 0px 40px 0px;
 }
 
+.footer {
+  position: static;
+  margin: 25px 0px 50px 50px;
+  text-align: left;
+}
+
+@media (max-width: 1150px) {
+  .footer {
+    margin: 40px 0px 50px 50px;
+  }
+}
+
+@media (max-width: 950px) {
+  .footer {
+    margin: 50px 0px 50px 50px;
+  }
+}
+
 @media (max-width: 876px) {
   .game-info {
     width: 400px;
@@ -113,10 +131,21 @@ h2 {
 
   .outer-game-div {
     width: 100%;
-    margin: 50px 0px 100px 0px;
+    margin: 60px 0px 100px 0px;
   }
 
   .title {
     width: 100%;
+  }
+
+  .footer {
+    margin: 10px 0px 50px 0px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .game-board {
+    margin-top: 18%;
   }
 }
