@@ -1,6 +1,9 @@
 ### Tic-Tac-Toe
 
 ### With Create React App
+---
+
+![Preview](https://github.com/wnyao/tic-tac-toe/blob/master/screenshots/tic_tac_toe.jpg)
 
 ---
 
