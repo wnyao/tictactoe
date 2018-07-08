@@ -1,7 +1,8 @@
 import React from "react";
-import "../css/index.css";
-import { Gameset, GameOverStatus } from "./gameComponent.js";
+import { Gameset } from "./gameComponent.js";
+import GameOverStatus from "./gameOverStatus.js";
 import List from "./list.js";
+import "../css/index.css";
 
 //Winner evaluation function
 function evalWinner(squares) {

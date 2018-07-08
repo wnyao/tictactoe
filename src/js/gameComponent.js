@@ -43,19 +43,6 @@ const GameInfo = props => (
   </div>
 );
 
-//Game over status for game ending
-const GameOverStatus = props => (
-  <div className="game">
-    <h1>{props.status}</h1>
-    <GameBoard
-      className="game-board game-over"
-      winningLine={props.winningLine}
-      squares={props.squares}
-      onClick={props.onSquareClick}
-    />
-  </div>
-);
-
 //Components of full tictactoe game set
 const Gameset = props => (
   <div className="game">
@@ -76,4 +63,4 @@ const Gameset = props => (
   </div>
 );
 
-export { Gameset, GameOverStatus };
+export { Gameset, GameBoard };
