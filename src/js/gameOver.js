@@ -1,7 +1,7 @@
 import React from "react";
 import { GameBoard } from "./gameComponent.js";
 import { ImageLink } from "./footer.js";
-import CloseIcon from "../res/images/close.png";
+import CloseIcon from "../res/images/close_icon.png";
 
 //Game over status for game ending
 const GameOver = props => (
