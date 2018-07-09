@@ -11,6 +11,7 @@ const GameOver = props => (
       className="close-icon"
       href="/"
       src={CloseIcon}
+      alt="Close"
       width="36"
       height="36"
     />
