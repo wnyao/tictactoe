@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Board } from "./board.js";
-import Footer from "./footer.js";
+import { Footer } from "./footer.js";
 
 //Toggle button component
 const ToggleButton = props => (

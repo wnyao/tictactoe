@@ -1,6 +1,6 @@
 import React from "react";
 import { Gameset } from "./gameComponent.js";
-import GameOverStatus from "./gameOverStatus.js";
+import GameOver from "./gameOver.js";
 import List from "./list.js";
 import "../css/index.css";
 
@@ -175,7 +175,7 @@ class Game extends React.Component {
     //Return gameover status when winner or draw is evaluated
     if (gameOverStatus !== undefined) {
       return (
-        <GameOverStatus
+        <GameOver
           status={gameOverStatus}
           winningLine={winnerInfo ? winnerInfo.line : []}
           squares={current.squares}
