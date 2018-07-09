@@ -2,7 +2,7 @@
   "name": "tictactoe",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://github.com/wnyao/tic-tac-toe",
+  "homepage": "https://wnyao.github.io/tic-tac-toe/",
   "dependencies": {
     "gh-pages": "^1.2.0",
     "react": "^16.4.1",

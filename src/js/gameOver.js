@@ -9,7 +9,7 @@ const GameOver = props => (
     <h1>{props.status}</h1>
     <ImageLink
       className="close-icon"
-      href="/"
+      href="https://wnyao.github.io/tic-tac-toe/"
       src={CloseIcon}
       alt="Close"
       width="36"
