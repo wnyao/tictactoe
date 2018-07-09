@@ -1,8 +1,8 @@
 {
   "name": "tictactoe",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://github.com/wnyao/tictactoe",
+  "private": false,
+  "homepage": "https://github.com/wnyao/tic-tac-toe",
   "dependencies": {
     "gh-pages": "^1.2.0",
     "react": "^16.4.1",
