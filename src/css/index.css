@@ -27,6 +27,10 @@ button {
   background-color: #fff;
 }
 
+.game > h1 {
+  width: 200px;
+}
+
 .board-row:after {
   clear: both;
   content: "";
@@ -156,5 +160,21 @@ button {
 @media (max-width: 650px) {
   .game-board {
     margin-top: 18%;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-board {
+    margin-top: 22%;
+  }
+}
+
+@media (max-width: 400px) {
+  .game-info {
+    margin-left: 30px;
+  }
+
+  .footer {
+    margin-left: 40px;
   }
 }
