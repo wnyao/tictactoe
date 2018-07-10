@@ -1,5 +1,5 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 15px "Century Gothic", Futura, sans-serif;
   margin: 0px;
   font-weight: bold;
 }
@@ -28,13 +28,7 @@ button {
 }
 
 .game > h1 {
-  width: 200px;
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+  width: 180px;
 }
 
 .status {
@@ -79,13 +73,15 @@ button {
 
 .game-board {
   display: inline-block;
-  margin-top: 8%;
-  padding-top: 30px;
-  width: 477px;
+  margin-top: 12%;
+  margin-bottom: 30px;
+  width: 450px;
 }
 
-.game-over {
-  margin: 5%;
+.game-over-board {
+  display: inline-block;
+  width: 450px;
+  margin: 10% 0% 10% 0%;
   padding-top: 0px;
 }
 
@@ -114,13 +110,17 @@ button {
 
 .footer {
   position: static;
-  margin: 25px 0px 50px 50px;
+  margin: 0px 0px 50px 50px;
   text-align: left;
 }
 
 .close-icon {
   margin: -55px 50px 20px 0px;
   text-align: right;
+}
+
+.close-icon > a > img {
+  border: 2px solid #000;
 }
 
 @media (max-width: 1150px) {
@@ -132,6 +132,10 @@ button {
 @media (max-width: 950px) {
   .footer {
     margin: 50px 0px 50px 50px;
+  }
+
+  .game-board {
+    margin-top: 18%;
   }
 }
 
@@ -159,20 +163,30 @@ button {
 
 @media (max-width: 650px) {
   .game-board {
-    margin-top: 18%;
+    margin-top: 25%;
+  }
+
+  .game > h1 {
+    margin: auto;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .close-icon {
+    margin: -35px 0px 20px 0px;
   }
 }
 
 @media (max-width: 480px) {
   .game-board {
-    margin-top: 22%;
+    margin-top: 33%;
   }
 
   .game-info {
-    margin-left: 30px;
+    margin-left: 20px;
   }
 
-  .footer {
-    margin-left: 40px;
+  .title > h1 {
+    margin: 40px 0px 20px 20px;
   }
 }

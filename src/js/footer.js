@@ -8,8 +8,6 @@ const Footer = props => (
       href="https://github.com/wnyao/tic-tac-toe"
       src={GithubIcon}
       alt="Github Icon"
-      width="24"
-      height="24"
     />
   </div>
 );
@@ -17,12 +15,7 @@ const Footer = props => (
 const ImageLink = props => (
   <div className={props.className}>
     <a href={props.href}>
-      <img
-        src={props.src}
-        alt={props.alt}
-        width={props.width}
-        height={props.height}
-      />
+      <img src={props.src} alt={props.alt} width="24" height="24" />
     </a>
   </div>
 );

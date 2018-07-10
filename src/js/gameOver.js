@@ -12,11 +12,9 @@ const GameOver = props => (
       href="https://wnyao.github.io/tic-tac-toe/"
       src={CloseIcon}
       alt="Close"
-      width="36"
-      height="36"
     />
     <GameBoard
-      className="game-board game-over"
+      className="game-over-board"
       winningLine={props.winningLine}
       squares={props.squares}
       onClick={props.onSquareClick}
