@@ -81,7 +81,7 @@ button {
 .game-over-board {
   display: inline-block;
   width: 450px;
-  margin: 10% 0% 10% 0%;
+  margin: 5% 0% 10% 0%;
   padding-top: 0px;
 }
 
@@ -173,7 +173,7 @@ button {
   }
 
   .close-icon {
-    margin: -35px 0px 20px 0px;
+    margin: -35px 2px 20px 0px;
   }
 }
 
