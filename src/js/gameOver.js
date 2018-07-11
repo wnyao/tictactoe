@@ -1,5 +1,5 @@
 import React from "react";
-import { GameBoard } from "./gameComponent.js";
+import { GameBoard } from "./game.js";
 import { ImageLink } from "./footer.js";
 import CloseIcon from "../res/images/close_icon.png";
 
