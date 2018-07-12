@@ -67,14 +67,14 @@ class GameContainer extends React.Component {
     }
 
     //set state
-    this.setState({
-      history: this.state.isDesc
+    this.setState(prevState => ({
+      history: prevState.isDesc
         ? history.concat([{ squares: squares }])
         : [{ squares: squares }].concat(history),
       stepNumber: history.length,
       moves: moves,
-      xIsNext: !this.state.xIsNext
-    });
+      xIsNext: !prevState.xIsNext
+    }));
   }
 
   jumpTo(move) {
@@ -108,11 +108,11 @@ class GameContainer extends React.Component {
 
   //Change order of history and moves record when togglebutton triggered
   changeOrder() {
-    this.setState({
-      history: this.state.history.reverse(),
-      moves: this.state.moves.reverse(),
-      isDesc: !this.state.isDesc
-    });
+    this.setState(prevState => ({
+      history: prevState.history.reverse(),
+      moves: prevState.moves.reverse(),
+      isDesc: !prevState.isDesc
+    }));
   }
 
   //Generate block elements history list
