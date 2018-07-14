@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { Button, Board } from "./board.js";
 import { Footer } from "./footer.js";
 
@@ -10,6 +12,11 @@ const ToggleButton = props => (
     value={props.value}
   />
 );
+
+ToggleButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
+};
 
 //Title of the app
 const AppTitle = props => (
@@ -29,6 +36,13 @@ const GameBoard = props => (
   </div>
 );
 
+GameBoard.propTypes = {
+  className: PropTypes.string.isRequired,
+  winningLine: PropTypes.arrayOf(PropTypes.number).isRequired,
+  squares: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
 //Game info includes history lists and desc/asc toggle button
 const GameInfo = props => (
   <div className="outer-game-div">
@@ -42,6 +56,13 @@ const GameInfo = props => (
     </div>
   </div>
 );
+
+GameInfo.propTypes = {
+  status: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  historyList: PropTypes.element.isRequired
+};
 
 //Components of full tictactoe game set
 const Game = props => (
@@ -62,5 +83,15 @@ const Game = props => (
     <Footer />
   </div>
 );
+
+Game.propTypes = {
+  winningLine: PropTypes.arrayOf(PropTypes.number).isRequired,
+  squares: PropTypes.arrayOf(PropTypes.string),
+  onSquareClick: PropTypes.func.isRequired,
+  status: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onToggleClick: PropTypes.func.isRequired,
+  historyList: PropTypes.element.isRequired
+};
 
 export { Game, GameBoard };

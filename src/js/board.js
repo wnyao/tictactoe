@@ -1,4 +1,6 @@
 import React from "react";
+import { func, string, object } from "prop-types";
+
 import "../css/index.css";
 
 //Presentational Component
@@ -12,6 +14,12 @@ const Button = props => (
   </button>
 );
 
+Button.propTypes = {
+  className: string,
+  onClick: func.isRequired,
+  style: object,
+  value: string.isRequired
+};
 class Board extends React.Component {
   //Return a single button component
   renderSquare(i, coordinate) {
@@ -22,12 +30,12 @@ class Board extends React.Component {
       color: "white"
     };
     const isMatch = winningLine.some(number => number === i);
-    const value = squares[i] === null ? i : squares[i];
+    const squareVal = squares[i] === null ? i : squares[i];
 
     const textStyle = () => {
-      if (typeof value === "number") {
+      if (typeof squareVal === "number") {
         return { color: "black" };
-      } else if (value === "X") {
+      } else if (squareVal === "X") {
         return { color: "#a31919", fontSize: "32px" };
       } else {
         return { color: "#ff3300", fontSize: "32px" };
@@ -38,7 +46,7 @@ class Board extends React.Component {
       <Button
         className={"square"}
         style={isMatch ? winningStyle : textStyle()}
-        value={squares[i] === null ? i : squares[i]}
+        value={squares[i] === null ? i.toString() : squares[i]}
         onClick={() => onClick(i, coordinate)}
       />
     );
