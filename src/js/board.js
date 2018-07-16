@@ -44,7 +44,7 @@ class Board extends React.Component {
 
     return (
       <Button
-        className={"square"}
+        className={"button--square"}
         style={isMatch ? winningStyle : textStyle()}
         value={squares[i] === null ? i.toString() : squares[i]}
         onClick={() => onClick(i, coordinate)}
@@ -64,7 +64,7 @@ class Board extends React.Component {
     const length = 3;
 
     const boardRows = Array.from({ length }, (currentVal, outer) => {
-      //outer & index: index of the current element being processed in the array
+      //outer & index: refer to index of the current element being processed in the array
       const row = 3 - outer;
       const boardRow = Array.from({ length }, (
         currentVal,

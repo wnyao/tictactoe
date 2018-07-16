@@ -19,14 +19,14 @@ ImageLink.propTypes = {
 };
 
 const Footer = props => (
-  <div className="footer">
+  <footer className="footer">
     <ImageLink
-      className="github-icon"
+      className="footer__imagelink"
       href="https://github.com/wnyao/tic-tac-toe"
       src={GithubIcon}
-      alt="Github Icon"
+      alt="GitHub Inc."
     />
-  </div>
+  </footer>
 );
 
 export { Footer, ImageLink };

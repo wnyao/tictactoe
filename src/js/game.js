@@ -7,7 +7,7 @@ import { Footer } from "./footer.js";
 //Toggle button component
 const ToggleButton = props => (
   <Button
-    className="toggle-button"
+    className="button--toggle"
     onClick={props.onClick}
     value={props.value}
   />
@@ -20,9 +20,9 @@ ToggleButton.propTypes = {
 
 //Title of the app
 const AppTitle = props => (
-  <div className="title">
+  <header className="header">
     <h1>Tic Tac Toe</h1>
-  </div>
+  </header>
 );
 
 //Gameboard for tictactoe
@@ -45,9 +45,9 @@ GameBoard.propTypes = {
 
 //Game info includes history lists and desc/asc toggle button
 const GameInfo = props => (
-  <div className="outer-game-div">
-    <div className="game-info">
-      <div className="game-status">
+  <div className="game-info">
+    <div className="game-info__field">
+      <div className="game-info__field__status">
         <h2>{props.status}</h2>
       </div>
       <ToggleButton onClick={props.onClick} value={props.value} />
@@ -69,7 +69,7 @@ const Game = props => (
   <div className="game">
     <AppTitle />
     <GameBoard
-      className="game-board"
+      className="game__board"
       winningLine={props.winningLine} //if winnerInfo is undefined; else return []
       squares={props.squares}
       onClick={props.onSquareClick}

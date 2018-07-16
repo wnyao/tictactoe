@@ -7,16 +7,16 @@ import CloseIcon from "../res/images/close_icon.png";
 
 //Game over status for game ending
 const GameOver = props => (
-  <div className="game">
+  <div className="game-over">
     <h1>{props.status}</h1>
     <ImageLink
-      className="close-icon"
+      className="game-over__imagelink"
       href="https://wnyao.github.io/tic-tac-toe/"
       src={CloseIcon}
       alt="Close"
     />
     <GameBoard
-      className="game-over-board"
+      className="game-over__board"
       winningLine={props.winningLine}
       squares={props.squares}
       onClick={props.onSquareClick}
