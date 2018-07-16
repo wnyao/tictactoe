@@ -44,7 +44,7 @@ class Board extends React.Component {
 
     return (
       <Button
-        className={"button--square"}
+        className={"board-row__button-square"}
         style={isMatch ? winningStyle : textStyle()}
         value={squares[i] === null ? i.toString() : squares[i]}
         onClick={() => onClick(i, coordinate)}

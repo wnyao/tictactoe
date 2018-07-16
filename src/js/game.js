@@ -7,7 +7,7 @@ import { Footer } from "./footer.js";
 //Toggle button component
 const ToggleButton = props => (
   <Button
-    className="button--toggle"
+    className="game-info__field__button"
     onClick={props.onClick}
     value={props.value}
   />

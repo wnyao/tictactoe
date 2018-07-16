@@ -32,7 +32,7 @@ button {
   width: 180px;
 }
 
-.button--square {
+.board-row__button-square {
   border: 0px solid #fff;
   float: left;
   font-size: 24px;
@@ -46,11 +46,11 @@ button {
   height: 150px;
 }
 
-.button--square:focus {
+.board-row__button-square:focus {
   outline: none;
 }
 
-.kbd-navigation .button--square:focus {
+.kbd-navigation .board-row__button-square:focus {
   background: #ddd;
 }
 
@@ -93,8 +93,8 @@ button {
   display: inline-block;
 }
 
-.button--toggle,
-.button--list {
+.game-info__field__button,
+.list__button {
   float: right;
   border: 1px solid #000;
   font-size: 12px;

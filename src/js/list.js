@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const List = props => (
   <div className="list">
     <button
-      className="button--list"
+      className="list__button"
       style={props.style}
       onClick={props.onClick}
     >
