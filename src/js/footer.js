@@ -1,7 +1,7 @@
-import React from "react";
-import { string } from "prop-types";
+import React from 'react';
+import { string } from 'prop-types';
 
-import GithubIcon from "../res/images/github_icon.png";
+import GithubIcon from '../res/images/github_icon.png';
 
 const ImageLink = props => (
   <div className={props.className}>
@@ -15,7 +15,7 @@ ImageLink.propTypes = {
   className: string,
   href: string.isRequired,
   src: string.isRequired,
-  alt: string
+  alt: string,
 };
 
 const Footer = props => (

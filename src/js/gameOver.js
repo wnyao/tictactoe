@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { GameBoard } from "./game.js";
-import { ImageLink } from "./footer.js";
-import CloseIcon from "../res/images/close_icon.png";
+import { GameBoard } from './game.js';
+import { ImageLink } from './footer.js';
+import CloseIcon from '../res/images/close_icon.png';
 
 //Game over status for game ending
 const GameOver = props => (
@@ -28,7 +28,7 @@ GameOver.propTypes = {
   status: PropTypes.string,
   winningLine: PropTypes.arrayOf(PropTypes.number).isRequired,
   squares: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 export default GameOver;

@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import GameContainer from "./js/gameContainer.js";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import GameContainer from './js/gameContainer.js';
 
-ReactDOM.render(<GameContainer />, document.getElementById("root"));
+ReactDOM.render(<GameContainer />, document.getElementById('root'));
