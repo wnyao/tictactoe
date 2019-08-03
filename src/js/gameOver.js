@@ -10,15 +10,15 @@ const GameOver = props => (
   <div className="game-over">
     <h1>{props.status}</h1>
     <ImageLink
+      alt="Close"
       className="game-over__imagelink"
       href="https://wnyao.github.io/tic-tac-toe/"
       src={CloseIcon}
-      alt="Close"
     />
     <GameBoard
       className="game-over__board"
-      winningLine={props.winningLine}
       squares={props.squares}
+      winningLine={props.winningLine}
       onClick={props.onSquareClick}
     />
   </div>

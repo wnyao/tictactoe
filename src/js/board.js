@@ -1,36 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { func, string, object } from 'prop-types';
 
-import '../css/index.css';
-
-//Presentational Component
-const Button = props => (
-  <button
-    className={props.className}
-    onClick={props.onClick}
-    style={props.style}
-  >
-    {props.value}
-  </button>
-);
-
-Button.propTypes = {
-  className: string,
-  onClick: func.isRequired,
-  style: object,
-  value: string.isRequired,
+const winningStyle = {
+  backgroundColor: 'cyan',
+  fontSize: '32px',
+  color: 'white',
 };
-class Board extends React.Component {
-  //Return a single button component
+
+class Board extends Component {
+  // Return square button component
   renderSquare(i, coordinate) {
     const { winningLine, squares, onClick } = this.props;
-    const winningStyle = {
-      backgroundColor: 'cyan',
-      fontSize: '32px',
-      color: 'white',
-    };
     const isMatch = winningLine.some(number => number === i);
-    const squareVal = squares[i] === null ? i : squares[i];
+    const squareVal = squares[i] || i;
 
     const textStyle = () => {
       if (typeof squareVal === 'number') return { color: 'black' };
@@ -40,16 +22,16 @@ class Board extends React.Component {
 
     return (
       <Button
-        className={'board-row__button-square'}
+        className="board-row__button-square"
         style={isMatch ? winningStyle : textStyle()}
-        value={squares[i] === null ? i.toString() : squares[i]}
+        value={squares[i] || i.toString()}
         onClick={() => onClick(i, coordinate)}
       />
     );
   }
 
-  //Render board of tictactoe
   renderBoard() {
+    const length = 3;
     const rowBlock = (squares, key) => (
       <div key={key} className="board-row">
         {squares[0]}
@@ -57,25 +39,30 @@ class Board extends React.Component {
         {squares[2]}
       </div>
     );
-    const length = 3;
 
+    // outer & index: refer to index of the current element being processed in the array
     const boardRows = Array.from({ length }, (currentVal, outer) => {
-      //outer & index: refer to index of the current element being processed in the array
       const row = 3 - outer;
-      const boardRow = Array.from({ length }, (
-        currentVal,
-        index //currentVal: current element being processed
-      ) => this.renderSquare(outer * length + index, [row, index + 1]));
-
+      const boardRow = Array.from({ length }, (currentVal, index) =>
+        this.renderSquare(outer * length + index, [row, index + 1])
+      );
       return rowBlock(boardRow, outer + 1);
     });
     return boardRows;
   }
 
   render() {
-    const boardComponent = this.renderBoard();
-    return boardComponent;
+    return this.renderBoard();
   }
 }
+
+const Button = props => <button {...props}>{props.value}</button>;
+
+Button.propTypes = {
+  className: string,
+  onClick: func.isRequired,
+  style: object,
+  value: string.isRequired,
+};
 
 export { Button, Board };

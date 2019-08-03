@@ -1,5 +1,5 @@
 body {
-  font: 15px "Century Gothic", Futura, sans-serif;
+  font: 15px 'Century Gothic', Futura, sans-serif;
   margin: 0px;
   font-weight: bold;
 }
@@ -59,6 +59,7 @@ button {
   text-align: center;
   position: absolute;
   width: 100%;
+  height: 100%;
 }
 
 .game-info {
@@ -106,7 +107,8 @@ button {
 }
 
 .footer {
-  position: static;
+  position: absolute;
+  bottom: 0px;
   margin: 0px 0px 50px 50px;
   text-align: left;
 }
@@ -155,6 +157,7 @@ button {
   .footer {
     margin: 10px 0px 50px 0px;
     text-align: center;
+    width: 100%;
   }
 }
 

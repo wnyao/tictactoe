@@ -1,6 +1,5 @@
 import React from 'react';
 import { string } from 'prop-types';
-
 import GithubIcon from '../res/images/github_icon.png';
 
 const ImageLink = props => (
@@ -11,22 +10,22 @@ const ImageLink = props => (
   </div>
 );
 
-ImageLink.propTypes = {
-  className: string,
-  href: string.isRequired,
-  src: string.isRequired,
-  alt: string,
-};
-
 const Footer = props => (
   <footer className="footer">
     <ImageLink
+      alt="GitHub Inc."
       className="footer__imagelink"
       href="https://github.com/wnyao/tic-tac-toe"
       src={GithubIcon}
-      alt="GitHub Inc."
     />
   </footer>
 );
+
+ImageLink.propTypes = {
+  alt: string,
+  className: string,
+  href: string.isRequired,
+  src: string.isRequired,
+};
 
 export { Footer, ImageLink };
