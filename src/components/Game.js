@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Board } from './board.js';
-import { Footer } from './footer.js';
+import { Button, Board } from './Board.js';
+import { Footer } from './Footer.js';
 
 const ToggleButton = props => (
   <Button

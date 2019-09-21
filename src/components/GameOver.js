@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GameBoard } from './game.js';
-import { ImageLink } from './footer.js';
+import { GameBoard } from './Game.js';
+import { ImageLink } from './Footer.js';
+
 import CloseIcon from '../res/images/close_icon.png';
 
 //Game over status for game ending

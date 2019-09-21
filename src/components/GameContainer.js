@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Game } from './game.js';
-import GameOver from './gameOver.js';
-import List from './list.js';
-import '../css/index.css';
+import { Game } from './Game.js';
+import GameOver from './GameOver.js';
+import List from './List.js';
+
+import '../style/index.css';
 
 function evalWinner(squares) {
   const lines = [

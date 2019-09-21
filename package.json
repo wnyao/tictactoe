@@ -4,11 +4,8 @@
   "private": false,
   "homepage": "https://wnyao.github.io/tic-tac-toe/",
   "dependencies": {
-    "braces": "^3.0.2",
-    "gh-pages": "2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2"
   },
   "devDependencies": {
@@ -17,8 +14,6 @@
     "pretty-quick": "^1.10.0"
   },
   "scripts": {
-    "predeploy": "$npm_execpath run build",
-    "deploy": "$npm_execpath run predeploy && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -29,10 +24,19 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
