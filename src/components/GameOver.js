@@ -13,7 +13,7 @@ const GameOver = props => (
     <ImageLink
       alt="Close"
       className="game-over__imagelink"
-      href="https://wnyao.github.io/tic-tac-toe/"
+      href="https://tic-tae-toe.netlify.com/"
       src={CloseIcon}
     />
     <GameBoard
